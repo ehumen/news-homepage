@@ -1,0 +1,211 @@
+body {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+}
+
+main {
+  padding-top: 60px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-areas: "main_article" "news" "articles" "footer";
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+.top-menu {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  padding: 10px 0;
+  background-color: hsl(36, 100%, 99%);
+}
+
+input#menu {
+  display: none;
+}
+input#menu:checked ~ nav {
+  z-index: 1;
+  height: 100vh;
+  width: 60vw;
+}
+input#menu:checked + label {
+  background: url("./assets/images/icon-menu-close.svg") no-repeat right;
+}
+
+.collapsible-menu label {
+  transition: all 100ms;
+  display: block;
+  height: 40px;
+  background: url("./assets/images/icon-menu.svg") no-repeat right;
+  margin-right: 20px;
+}
+.collapsible-menu nav {
+  height: 0;
+  overflow: hidden;
+  background-color: hsl(36, 100%, 99%);
+}
+.collapsible-menu nav ul {
+  list-style: none;
+}
+.collapsible-menu nav ul li {
+  margin-top: 3em;
+}
+.collapsible-menu nav ul a {
+  font-size: 2em;
+  text-decoration: none;
+  color: black;
+}
+.collapsible-menu nav ul a:hover {
+  color: hsl(5, 85%, 63%);
+}
+
+.btn {
+  height: 3em;
+  width: 40%;
+  border: none;
+  font-weight: 700;
+  font-size: 0.8em;
+  letter-spacing: 3px;
+  color: hsl(36, 100%, 99%);
+  background-color: hsl(5, 85%, 63%);
+}
+.btn:hover {
+  cursor: pointer;
+  background-color: hsl(240, 100%, 5%);
+}
+
+.block-main {
+  grid-area: main_article;
+  display: grid;
+  grid-template-areas: "picture" "header" "paragraf";
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+.block-main picture {
+  grid-area: picture;
+}
+.block-main picture img {
+  width: 100%;
+}
+.block-main h1 {
+  grid-area: header;
+}
+.block-main div {
+  grid-area: paragraf;
+}
+
+.block-news {
+  grid-area: news;
+  padding: 1em;
+  color: hsl(36, 100%, 99%);
+  background-color: hsl(240, 100%, 5%);
+}
+.block-news article {
+  margin: 1em auto;
+  padding-bottom: 1em;
+  border-bottom: solid 1px hsl(36, 100%, 99%);
+}
+.block-news article:last-of-type {
+  border: none;
+}
+.block-news h2 {
+  color: hsl(35, 77%, 62%);
+}
+.block-news h3:hover {
+  cursor: pointer;
+  color: hsl(35, 77%, 62%);
+}
+
+.block-articles {
+  grid-area: articles;
+}
+.block-articles article {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 25% auto;
+  grid-template-areas: "img text";
+  color: hsl(236, 13%, 42%);
+  margin-bottom: 2em;
+}
+.block-articles article img {
+  width: 100%;
+  grid-area: img;
+}
+.block-articles article h3 {
+  margin: 0.3em 0;
+  color: hsl(0, 0%, 0%);
+}
+.block-articles article h3:hover {
+  cursor: pointer;
+  color: hsl(5, 85%, 63%);
+}
+.block-articles article h2 {
+  margin: 0.3em 0;
+}
+.block-articles article div {
+  grid-area: text;
+}
+
+footer {
+  grid-area: footer;
+}
+
+@media (min-width: 600px) {
+  main {
+    margin: 5em 4em;
+    padding-top: 0;
+    grid-template-areas: "main_article main_article news" "main_article main_article news" "articles articles articles" "footer footer footer";
+    grid-gap: 20px;
+  }
+  .block-main {
+    grid-template-areas: "picture picture" "header paragraf";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 1em;
+  }
+  .block-main h1 {
+    font-size: 3em;
+    font-weight: 800;
+    margin: 0;
+  }
+  .block-main p {
+    margin: 0;
+  }
+  .block-main div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .block-articles {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .top-menu {
+    width: 100%;
+    margin: 0 4em;
+  }
+  .collapsible-menu {
+    margin-right: 9em;
+  }
+  .collapsible-menu label {
+    display: none;
+  }
+  .collapsible-menu nav {
+    overflow: visible;
+    font-size: 0.5em;
+    height: 100%;
+  }
+  .collapsible-menu nav ul li {
+    margin-top: 0;
+    padding: 2em;
+    float: left;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
