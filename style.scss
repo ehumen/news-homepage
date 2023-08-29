@@ -1,10 +1,38 @@
+$orange: hsl(35, 77%, 62%);
+$red: hsl(5, 85%, 63%);
+$white: hsl(36, 100%, 99%);
+$blue: hsl(233, 8%, 79%);
+$dark-blue: hsl(236, 13%, 42%);
+$very-dark-blue: hsl(240, 100%, 5%);
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
 }
 
+.side-effect {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  background-color: rgb(9, 7, 14);
+  opacity: 0.6;
+}
+
+.side-effect.active {
+  display: block;
+  z-index: 1;
+}
+
 main {
-  padding-top: 60px;
+  padding: 4em 1em;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-areas:
@@ -18,67 +46,80 @@ main {
 
 .top-menu {
   position: fixed;
-  top: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
+  padding: 1em;
   height: 50px;
   width: 100%;
-  padding: 10px 0;
-  background-color: hsl(36, 100%, 99%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
 
 }
 
-input#menu {
-  display: none;
-
-  &:checked {
-    & ~ nav {
-      z-index: 1;
-      height: 100vh;
-      width: 60vw;
-    }
-    &+ label {
-      background: url("./assets/images/icon-menu-close.svg") no-repeat right;
-    }
+.hamburger {
+  z-index: 3;
+  input#menu {
+    display: none;
   }
-}
 
-.collapsible-menu {
   label {
-    transition: all 100ms;
+    transition: all 300ms;
     display: block;
-    height: 40px;
+    height: 3em;
+    width: 3em;
     background: url("./assets/images/icon-menu.svg") no-repeat right;
-    margin-right: 20px;
   }
-
-  nav {
-    height: 0;
-    overflow: hidden;
-    background-color: hsl(36, 100%, 99%);
-
-    ul {
-      list-style: none;
-
-      li {
-        margin-top: 3em;
-      }
-
-      a {
-        font-size: 2em;
-        text-decoration: none;
-        color: black;
-      }
-
-      a:hover {
-        color: hsl(5, 85%, 63%);
-      }
-    }
+  label.active{
+    background: url("./assets/images/icon-menu-close.svg") no-repeat right;
   }
 
 }
 
+.nav-menu {
+  position: fixed;
+  top: 0  ;
+  right: -30em;
+  width: 60vw;
+  height: 100vh;
+  background-color: $white;
+  z-index: 3;
+
+  ul {
+    list-style: none;
+
+    li {
+      margin-top: 3em;
+      width: fit-content;
+      &:after{
+        content: '';
+        border: 2px solid $red;
+        display: block;
+        width: 100%;
+        margin-top: 0.2em;
+        border-radius: 30px;
+        transform: scale(0);
+        transition: transform 0.2s ease-in;
+      }
+      &:hover:after{
+        transform: scale(1);
+      }
+    }
+
+    a {
+      font-size: 2em;
+      text-decoration: none;
+      color: black;
+    }
+  //    &:hover {
+  //      color: hsl(5, 85%, 63%);
+  //    }
+  //  }
+  }
+}
+
+.nav-menu.active {
+  right: 0;
+}
 
 .btn {
   height: 3em;
@@ -195,8 +236,7 @@ footer {
 
 @media (min-width: 600px) {
   main {
-    margin: 5em 4em;
-    padding-top: 0;
+    padding: 6em 10em;
     grid-template-areas:
     "main_article main_article news"
     "main_article main_article news"
@@ -236,30 +276,46 @@ footer {
 
   }
   .top-menu {
-    width: 100%;
-    margin: 0 4em;
+    padding: 2em 10em 4em 10em;
+    align-items: flex-start;
   }
-  .collapsible-menu {
-    margin-right: 9em;
-
-    label {
-      display: none;
-    }
-
-    nav {
-      overflow: visible;
-      font-size: 0.5em;
-      height: 100%;
-
-      ul {
-
-
-        li {
-          margin-top: 0;
-          padding: 2em;
-          float: left;
-        }
-      }
-    }
+  .hamburger{
+    display: none;
   }
+.nav-menu {
+  position: relative;
+  left: 2em;
+  top: -3em;
+  width: auto;
+  height: auto;
+  font-size: 0.5em;
+  ul{
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    margin-top: 0;
+    padding: 2em;
+    float: left;
+
+  }
+}
+  //
+  //  nav {
+  //    overflow: visible;
+  //    font-size: 0.5em;
+  //    height: 100%;
+  //    right: 0;
+  //
+  //    ul {
+  //
+  //
+  //      li {
+  //        margin-top: 0;
+  //        padding: 2em;
+  //        float: left;
+  //      }
+  //    }
+  //  }
+  //}
 }

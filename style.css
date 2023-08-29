@@ -1,10 +1,31 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Inter", sans-serif;
   font-size: 15px;
 }
 
+.side-effect {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  background-color: rgb(9, 7, 14);
+  opacity: 0.6;
+}
+
+.side-effect.active {
+  display: block;
+  z-index: 1;
+}
+
 main {
-  padding-top: 60px;
+  padding: 4em 1em;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-areas: "main_article" "news" "articles" "footer";
@@ -14,53 +35,69 @@ main {
 
 .top-menu {
   position: fixed;
-  top: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
+  padding: 1em;
   height: 50px;
   width: 100%;
-  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: hsl(36, 100%, 99%);
 }
 
-input#menu {
+.hamburger {
+  z-index: 3;
+}
+.hamburger input#menu {
   display: none;
 }
-input#menu:checked ~ nav {
-  z-index: 1;
-  height: 100vh;
-  width: 60vw;
+.hamburger label {
+  transition: all 300ms;
+  display: block;
+  height: 3em;
+  width: 3em;
+  background: url("./assets/images/icon-menu.svg") no-repeat right;
 }
-input#menu:checked + label {
+.hamburger label.active {
   background: url("./assets/images/icon-menu-close.svg") no-repeat right;
 }
 
-.collapsible-menu label {
-  transition: all 100ms;
-  display: block;
-  height: 40px;
-  background: url("./assets/images/icon-menu.svg") no-repeat right;
-  margin-right: 20px;
-}
-.collapsible-menu nav {
-  height: 0;
-  overflow: hidden;
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -30em;
+  width: 60vw;
+  height: 100vh;
   background-color: hsl(36, 100%, 99%);
+  z-index: 3;
 }
-.collapsible-menu nav ul {
+.nav-menu ul {
   list-style: none;
 }
-.collapsible-menu nav ul li {
+.nav-menu ul li {
   margin-top: 3em;
+  width: fit-content;
 }
-.collapsible-menu nav ul a {
+.nav-menu ul li:after {
+  content: "";
+  border: 2px solid hsl(5, 85%, 63%);
+  display: block;
+  width: 100%;
+  margin-top: 0.2em;
+  border-radius: 30px;
+  transform: scale(0);
+  transition: transform 0.2s ease-in;
+}
+.nav-menu ul li:hover:after {
+  transform: scale(1);
+}
+.nav-menu ul a {
   font-size: 2em;
   text-decoration: none;
   color: black;
 }
-.collapsible-menu nav ul a:hover {
-  color: hsl(5, 85%, 63%);
+
+.nav-menu.active {
+  right: 0;
 }
 
 .btn {
@@ -156,8 +193,7 @@ footer {
 
 @media (min-width: 600px) {
   main {
-    margin: 5em 4em;
-    padding-top: 0;
+    padding: 6em 10em;
     grid-template-areas: "main_article main_article news" "main_article main_article news" "articles articles articles" "footer footer footer";
     grid-gap: 20px;
   }
@@ -187,21 +223,25 @@ footer {
     grid-template-columns: 1fr 1fr 1fr;
   }
   .top-menu {
-    width: 100%;
-    margin: 0 4em;
+    padding: 2em 10em 4em 10em;
+    align-items: flex-start;
   }
-  .collapsible-menu {
-    margin-right: 9em;
-  }
-  .collapsible-menu label {
+  .hamburger {
     display: none;
   }
-  .collapsible-menu nav {
-    overflow: visible;
+  .nav-menu {
+    position: relative;
+    left: 2em;
+    top: -3em;
+    width: auto;
+    height: auto;
     font-size: 0.5em;
-    height: 100%;
   }
-  .collapsible-menu nav ul li {
+  .nav-menu ul {
+    margin: 0;
+    padding: 0;
+  }
+  .nav-menu li {
     margin-top: 0;
     padding: 2em;
     float: left;

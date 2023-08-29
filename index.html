@@ -21,23 +21,26 @@
             color: hsl(228, 45%, 44%);
         }
     </style>
+
 </head>
 <body>
-
 <header class="top-menu">
-    <img src="./assets/images/logo.svg" alt="logo">
-    <div class="collapsible-menu">
+    <div class="side-effect"></div>
+    <div class="logo">
+        <img src="./assets/images/logo.svg" alt="logo">
+    </div>
+    <nav class="nav-menu">
+        <ul>
+            <li><a href="#"> Home</a></li>
+            <li><a href="#">New</a></li>
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Trending</a></li>
+            <li><a href="#">Categories</a></li>
+        </ul>
+    </nav>
+    <div class="hamburger">
         <input type="checkbox" id="menu">
         <label for="menu"> </label>
-        <nav>
-            <ul>
-                <li><a href="#"> Home</a></li>
-                <li><a href="#">New</a></li>
-                <li><a href="#">Popular</a></li>
-                <li><a href="#">Trending</a></li>
-                <li><a href="#">Categories</a></li>
-            </ul>
-        </nav>
     </div>
 </header>
 <main>
@@ -49,7 +52,8 @@
         <h1> The Bright Future of Web 3.0?</h1>
         <div>
             <p>
-                We dive into the next evolution of the web that claims to put the power of the platforms back into the
+                We dive into the next evolution of the web that claims to put the power of the platforms back into
+                the
                 hands
                 of
                 the
@@ -102,6 +106,16 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
     Coded by <a href="#">Yevhen Humen</a>.
 </footer>
-
+<script>
+    const checkbox = document.querySelector("input#menu");
+    const divSideEffect = document.querySelector(".side-effect");
+    const navMenu = document.querySelector("nav");
+    const hamburger = document.querySelector("label");
+    checkbox.addEventListener("change", () => {
+        divSideEffect.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    })
+</script>
 </body>
 </html>
